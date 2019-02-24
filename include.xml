@@ -11,11 +11,19 @@
 	</section>
 
 	<section if="android">
-		<haxelib name="extension-android-support-v4" /> 
-		<set name="google-play-services-basement" />
-		<set name="google-play-services-ads-lite" />
-		<haxelib name="extension-googleplayservices-basement" />
-		<dependency name="admobex" path="dependencies/admobex" /> 
+		<section unless="openfl-legacy || openfl-next">
+			<echo value="ALERT: Setting GoolePlayServices to the last version on your SDK. Please read how to upgrade and choose your version here: https://github.com/player-03/google-play-services" unless="playServicesVersion" />
+			<set name="playServicesVersion" value="+" unless="playServicesVersion" />
+		</section>
+		
+		<section if="openfl-legacy || openfl-next">
+			<set name="google-play-services-basement" />
+			<set name="google-play-services-ads-lite" />
+			<haxelib name="extension-googleplayservices-basement" />
+		</section>
+
+		<dependency name="admobex" path="dependencies/admobex" />	
+	
 		<dependency name="adcolony-mediation"		path="dependencies/adcolony-mediation"		if="adcolony-mediation" />
 		<dependency name="applovin-mediation"		path="dependencies/applovin-mediation"		if="applovin-mediation" />
 		<dependency name="chartboost-mediation"		path="dependencies/chartboost-mediation"		if="chartboost-mediation" />
